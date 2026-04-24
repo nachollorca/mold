@@ -1,0 +1,53 @@
+_templates_suffix: .jinja
+_subdirectory: template
+
+_answers_file: .copier-answers.yml
+
+project_name:
+  type: str
+  help: >-
+    Project name in kebab-case (lowercase, dashes).
+    This is the PyPI distribution name, e.g. "my-awesome-lib".
+
+project_slug:
+  type: str
+  help: >-
+    Python import name in snake_case (lowercase, underscores).
+    Used as the package directory under src/, e.g. "my_awesome_lib".
+  default: "{{ project_name | replace('-', '_') | replace(' ', '_') | lower }}"
+
+project_description:
+  type: str
+  help: Short one-line description of the project.
+  default: ""
+
+author_name:
+  type: str
+  help: Author full name.
+
+author_email:
+  type: str
+  help: Author email address.
+
+python_version:
+  type: str
+  help: Minimum supported Python version.
+  default: "3.13"
+  choices:
+    - "3.9"
+    - "3.10"
+    - "3.11"
+    - "3.12"
+    - "3.13"
+    - "3.14"
+
+license:
+  type: str
+  help: Project license.
+  choices:
+    "MIT - permissive, short and simple": MIT
+    "Apache-2.0 - permissive, includes patent grant": Apache-2.0
+    "BSD-3-Clause - permissive, similar to MIT": BSD-3-Clause
+    "GPL-3.0 - copyleft, derivatives must also be GPL": GPL-3.0
+    "MPL-2.0 - weak copyleft, file-level": MPL-2.0
+    "Proprietary - all rights reserved, no redistribution": Proprietary

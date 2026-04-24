@@ -1,0 +1,49 @@
+# Project metadata ------------------------------------------------------------
+[project]
+name = "{{ project_name }}"
+version = "0.1.0"
+description = "{{ project_description }}"
+requires-python = ">={{ python_version }}"
+license = { text = "{{ license }}" }
+readme = "README.md"
+authors = [{ name = "{{ author_name }}", email = "{{ author_email }}" }]
+dependencies = []
+
+# Dev / optional dependencies -------------------------------------------------
+[dependency-groups]
+dev = [
+    "pytest-cov",
+]  # complexipy, ruff, ty must be installed globally via uvx / uv tool
+
+# Build backend ---------------------------------------------------------------
+[build-system]
+requires = ["uv_build>=0.11.1,<0.12.0"]
+build-backend = "uv_build"
+
+# Ruff (lint + format) --------------------------------------------------------
+[tool.ruff]
+fix = true
+line-length = 100
+
+[tool.ruff.lint]
+select = ["D", "E", "F", "I", "UP", "B", "SIM", "RUF"]
+ignore = ["D105", "D107"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D"]
+
+# Semantic release (automated versioning from conventional commits) -----------
+[tool.semantic_release]
+version_toml = ["pyproject.toml:project.version"]
+build_command = ""
+commit_message = "chore: release {version}"
+commit_parser = "conventional"
+tag_format = "v{version}"
+changelog_file = false
+
+[tool.semantic_release.branches.main]
+match = "main"
+prerelease = false

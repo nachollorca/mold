@@ -1,0 +1,28 @@
+# {{ project_name }}
+
+{% if project_description %}{{ project_description }}{% endif %}
+
+## Installation
+
+```bash
+uv install {{ project_name }}
+```
+
+## Usage
+
+```python
+import {{ project_slug }}
+```
+
+## Development
+
+This project uses [uv](https://docs.astral.sh/uv/), [just](https://just.systems/) and [prek](https://github.com/j178/prek).
+
+```bash
+just sync               # install dependencies
+just install-hooks      # set up pre-commit hooks
+just test               # run tests with coverage
+just format             # lint + format
+just check-types        # static type checking
+just check-complexity   # static type checking
+```

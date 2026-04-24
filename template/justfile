@@ -1,0 +1,37 @@
+set dotenv-load := true
+
+# Python environment ----------------------------------------------------------
+sync:
+    uv lock --upgrade
+    uv sync --all-extras --all-groups
+
+reset-env:
+    rm -rf .venv
+    uv sync
+
+# Pre-commit hooks ------------------------------------------------------------
+install-hooks:
+    prek install
+
+update-hooks:
+    prek auto-update
+
+# Code quality ----------------------------------------------------------------
+format:
+    ruff check --select I --fix .
+    ruff format .
+
+check-types:
+    ty check src
+
+check-complexity:
+    uvx complexipy src
+
+# Test and run ----------------------------------------------------------------
+test target="":
+    uv run pytest --cov --cov-fail-under=90 {{ target }}
+
+run file:
+    uv run --env-file .env {{ file }}
+
+# Project specific commands ---------------------------------------------------
