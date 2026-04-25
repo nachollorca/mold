@@ -18,14 +18,14 @@ update-hooks:
 
 # Code quality ----------------------------------------------------------------
 format:
-    ruff check --select I --fix .
-    ruff format .
+    uv run ruff check --select I --fix .
+    uv run ruff format .
 
 check-types:
-    ty check src
+    uv run ty check src
 
 check-complexity:
-    uvx complexipy src
+    uv run complexipy src
 
 # Test and run ----------------------------------------------------------------
 test target="":
