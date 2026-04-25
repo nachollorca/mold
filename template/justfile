@@ -1,13 +1,19 @@
 set dotenv-load := true
 
 # Python environment ----------------------------------------------------------
-sync:
+# Refresh the lockfile and sync (use when you intentionally want newer deps).
+upgrade:
     uv lock --upgrade
     uv sync --all-extras --all-groups
 
+# Install from the committed lockfile (matches CI).
+install:
+    uv sync --frozen --all-extras --all-groups
+
+# Nuke the venv and reinstall from the lockfile (last-resort env reset).
 reset-env:
     rm -rf .venv
-    uv sync
+    uv sync --frozen --all-extras --all-groups
 
 # Pre-commit hooks ------------------------------------------------------------
 install-hooks:

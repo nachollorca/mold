@@ -22,7 +22,8 @@ The `uv.lock` file is committed to source control so CI and contributors install
 exact same dependency versions. Use `just upgrade` to refresh the lockfile.
 
 ```bash
-just sync               # install dependencies
+just install            # install deps from the lockfile (matches CI)
+just upgrade            # refresh the lockfile and sync
 just install-hooks      # set up pre-commit hooks
 just test               # run tests with coverage
 just format             # lint + format
