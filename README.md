@@ -35,6 +35,14 @@ Because every commit on `main` is guaranteed to follow the Conventional Commits 
 - [`python-semantic-release`](https://python-semantic-release.readthedocs.io/) — automatic version bumping, changelog, and GitHub release
 - GitHub Actions — `verify` (per-branch checks) and `release` (auto publish to PyPI + GitHub on merge to `main`)
 
+## Prerequisites
+
+Before using this template, you need to install the following tools on your system (they are not Python dependencies and won't be installed in a virtual environment):
+
+- [uv](https://docs.astral.sh/uv/getting-started/installation/) — required to run Copier and manage the project.
+- [just](https://github.com/casey/just#installation) — required to run the tasks defined in the `justfile`.
+- [prek](https://github.com/j178/prek#installation) — required to run the pre-commit hooks.
+
 ## Usage
 
 ```bash
