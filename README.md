@@ -1,18 +1,37 @@
 # python-package-template
 
-A [Copier](https://copier.readthedocs.io/) template for Python packages.
+A modern [Copier](https://copier.readthedocs.io/) template for Python packages.
 
-It scaffolds:
+## Why this template
 
-- `src/`-layout Python package with `uv_build` backend
-- `uv` for dependency management
-- `just` task runner (`justfile`)
-- `prek` for pre-commit hooks
-- GitHub Actions: `verify` (lint + type + complexity + tests) and semantic `release`
-- Issue and PR templates
-- Sensible `.gitignore`, empty `.env`, minimal `README.md`
+**One source of truth for code quality, identical locally and on CI, plus fully automated semantic versioning and publishing.**
 
-Both the `prek` / pre-commit hooks and the `verify` CI workflow delegate to the same `just` recipes (`just format` triggers `ruff`, `just check-types` triggers `ty`, `just check-complexity` triggers `complexipy`, `just test` triggers `pytest-cov`), so the exact checks that run locally on commit are the ones that run on CI.
+Every check (lint, format, type, complexity, spelling, secret scanning, tests) is defined once in the [`justfile`](template/justfile) / [`prek.toml`](template/prek.toml) and runs both in your pre-commit hook *and* in the GitHub Actions [`verify.yaml`](template/.github/workflows/verify.yml) workflow — bit-for-bit the same. Conventional commits are enforced at commit time, and every merge to `main` triggers an automatic version bump, GitHub release, and PyPI publish — no manual tagging, changelogs, or release steps.
+
+## How it works
+
+### Code Quality Checks
+The [`justfile`](template/justfile) is the canonical place where developer commands live: `just format` (ruff lint + format), `just check-types` (ty), `just check-complexity` (complexipy), and `just test` (pytest with coverage). On every commit, [`prek`](https://github.com/j178/prek) (a faster `pre-commit` drop-in) runs a combination of generic file hygiene hooks, `codespell` for typos, `gitleaks` for leaked secrets, `commitizen` for [Conventional Commits](https://www.conventionalcommits.org/) enforcement on the commit message, and the local `just` recipes above. The CI [`verify.yml`](template/.github/workflows/verify.yml) workflow simply executes `prek run --all-files` followed by `just test` — so what passes (or fails) on your machine is exactly what passes (or fails) on the remote, and [`prek.toml`](template/prek.toml) is the single source of truth for hook versions.
+
+### Automatic Versioning and Releases
+Because every commit on `main` is guaranteed to follow the Conventional Commits spec (thanks to the `commitizen` hook), [`python-semantic-release`](https://python-semantic-release.readthedocs.io/) can deterministically derive the next version number from the commit history. The [`release.yml`](template/.github/workflows/release.yml) workflow runs on every merge to `main`: it computes the new version, updates `pyproject.toml` and the changelog, tags the commit, builds the wheel with `uv build`, publishes it to PyPI with `uv publish`, and creates the matching GitHub release. The whole feat-branch → PR → merge → release loop is hands-off: you write conventional commits, the rest happens by itself.
+
+## Tooling
+
+- [`uv`](https://docs.astral.sh/uv/) — dependency management, builds, and publishing
+- [`uv_build`](https://docs.astral.sh/uv/concepts/build-backend/) — build backend
+- [`just`](https://github.com/casey/just) — task runner (`justfile`)
+- [`prek`](https://github.com/j178/prek) — fast pre-commit hook runner
+- [`ruff`](https://docs.astral.sh/ruff/) — linting and formatting
+- [`ty`](https://github.com/astral-sh/ty) — static type checking
+- [`complexipy`](https://github.com/rohaquinlop/complexipy) — cyclomatic complexity checks
+- [`pytest`](https://docs.pytest.org/) + [`pytest-cov`](https://pytest-cov.readthedocs.io/) — tests with coverage gate
+- [`codespell`](https://github.com/codespell-project/codespell) — spell checking
+- [`gitleaks`](https://github.com/gitleaks/gitleaks) — secret scanning
+- [`pre-commit-hooks`](https://github.com/pre-commit/pre-commit-hooks) — generic file hygiene (trailing whitespace, EOF, merge conflicts, large files, TOML/YAML/JSON validity, …)
+- [`commitizen`](https://commitizen-tools.github.io/commitizen/) — Conventional Commits enforcement
+- [`python-semantic-release`](https://python-semantic-release.readthedocs.io/) — automatic version bumping, changelog, and GitHub release
+- GitHub Actions — `verify` (per-branch checks) and `release` (auto publish to PyPI + GitHub on merge to `main`)
 
 ## Usage
 
