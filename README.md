@@ -23,14 +23,14 @@ The CI [`verify.yml`](template/.github/workflows/verify.yml) workflow simply exe
 Because every commit on `main` is guaranteed to follow the Conventional Commits spec (thanks to the `commitizen` hook), [`python-semantic-release`](https://python-semantic-release.readthedocs.io/) can deterministically derive the next version number from the commit history.
 
 The [`release.yml`](template/.github/workflows/release.yml) workflow runs on every merge to `main`:
-1. it computes the new version
-2. updates `pyproject.toml` and the changelog
-3. tags the commit
-4. builds the wheel with `uv build`
-5. ublishes it to PyPI with `uv publish`
-6. and creates the matching GitHub release.
+1. Computes the new version
+2. Updates `pyproject.toml` and the changelog
+3. Tags the commit
+4. Builds the wheel with `uv build`
+5. Publishes it to PyPI with `uv publish`
+6. Creates the matching GitHub release.
  
-The whole feat-branch → PR → merge → release loop is hands-off: you write conventional commits, the rest happens by itself.
+The whole **feat-branch → PR → merge → release loop is hands-off**: you write conventional commits, the rest happens by itself.
 
 ## Tooling
 
