@@ -1,4 +1,6 @@
-# This workflow runs tests, linting and type hinting for every push
+# This workflow runs all per-file checks (via prek) and the test suite for every push.
+# prek.toml is the single source of truth for hook versions and per-file checks;
+# this workflow only orchestrates `prek run --all-files` and `just test`.
 
 name: verify
 
@@ -31,17 +33,14 @@ jobs:
       - name: Install just
         uses: extractions/setup-just@v3
 
-      - name: Install the project
-        run: just sync
+      - name: Install prek
+        run: uv tool install prek
 
-      - name: Run linting
-        run: just format
+      - name: Install the project (frozen)
+        run: just install
 
-      - name: Run type checks
-        run: just check-types
-
-      - name: Run complexity analysis
-        run: just check-complexity
+      - name: Run prek hooks
+        run: prek run --all-files --show-diff-on-failure --color always
 
       - name: Run tests
         run: just test
