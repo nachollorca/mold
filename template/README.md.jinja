@@ -18,15 +18,4 @@ import {{ project_slug }}
 
 This project uses [uv](https://docs.astral.sh/uv/), [just](https://just.systems/) and [prek](https://github.com/j178/prek).
 
-The `uv.lock` file is committed to source control so CI and contributors install the
-exact same dependency versions. Use `just upgrade` to refresh the lockfile.
-
-```bash
-just install            # install deps from the lockfile (matches CI)
-just upgrade            # refresh the lockfile and sync
-just install-hooks      # set up pre-commit hooks
-just test               # run tests with coverage
-just format             # lint + format
-just check-types        # static type checking
-just check-complexity   # static type checking
-```
+See [justfile](justfile) for pre-built commands used along pre-commit hooks and CI.
