@@ -41,7 +41,7 @@ convention = "google"
 # Semantic release (automated versioning from conventional commits) -----------
 [tool.semantic_release]
 version_toml = ["pyproject.toml:project.version"]
-build_command = ""
+build_command = ""  # We do this using uv in the CI verify.yaml workflow
 commit_message = "chore: release {version}"
 commit_parser = "conventional"
 tag_format = "v{version}"
