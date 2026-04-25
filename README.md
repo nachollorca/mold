@@ -1,12 +1,14 @@
-# python-package-template
+# mold
 
 A modern [Copier](https://copier.readthedocs.io/) template for Python packages.
+
+![mold](media/mold.png)
 
 ## Why this template
 
 **One source of truth for code quality, identical locally and on CI, plus fully automated semantic versioning and publishing.**
 
-Every check (lint, format, type, complexity, spelling, secret scanning, tests) is defined once in the [`justfile`](template/justfile) / [`prek.toml`](template/prek.toml) and runs both in your pre-commit hook *and* in the GitHub Actions [`verify.yaml`](template/.github/workflows/verify.yml) workflow — bit-for-bit the same. Conventional commits are enforced at commit time, and every merge to `main` triggers an automatic version bump, GitHub release, and PyPI publish — no manual tagging, changelogs, or release steps.
+Every check (lint, format, type, complexity, spelling, secret scanning, tests) is defined once in the [`justfile`](template/justfile) / [`prek.toml`](template/prek.toml) and runs both in your pre-commit hook *and* in the GitHub Actions [`verify.yaml`](template/.github/workflows/verify.yml) workflow. Conventional commits are enforced, and every merge to `main` triggers an automatic version bump, GitHub release, and PyPI publish — no manual tagging, changelogs, or release steps.
 
 ## How it works
 
@@ -37,7 +39,7 @@ Because every commit on `main` is guaranteed to follow the Conventional Commits 
 
 ```bash
 # from github
-uvx copier copy gh:nachollorca/python-package-template my-new-project
+uvx copier copy gh:nachollorca/mold my-new-project
 # or from a local checkout:
-uvx copier copy ./python-package-template my-new-project
+uvx copier copy ./mold my-new-project
 ```
