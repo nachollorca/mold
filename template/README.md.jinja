@@ -18,6 +18,9 @@ import {{ project_slug }}
 
 This project uses [uv](https://docs.astral.sh/uv/), [just](https://just.systems/) and [prek](https://github.com/j178/prek).
 
+The `uv.lock` file is committed to source control so CI and contributors install the
+exact same dependency versions. Use `just upgrade` to refresh the lockfile.
+
 ```bash
 just sync               # install dependencies
 just install-hooks      # set up pre-commit hooks
