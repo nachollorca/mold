@@ -13,10 +13,24 @@ Every check (lint, format, type, complexity, spelling, secret scanning, tests) i
 ## How it works
 
 ### Code Quality Checks
-The [`justfile`](template/justfile) is the canonical place where developer commands live: `just format` (ruff lint + format), `just check-types` (ty), `just check-complexity` (complexipy), and `just test` (pytest with coverage). On every commit, [`prek`](https://github.com/j178/prek) (a faster `pre-commit` drop-in) runs a combination of generic file hygiene hooks, `codespell` for typos, `gitleaks` for leaked secrets, `commitizen` for [Conventional Commits](https://www.conventionalcommits.org/) enforcement on the commit message, and the local `just` recipes above. The CI [`verify.yml`](template/.github/workflows/verify.yml) workflow simply executes `prek run --all-files` followed by `just test` — so what passes (or fails) on your machine is exactly what passes (or fails) on the remote, and [`prek.toml`](template/prek.toml) is the single source of truth for hook versions.
+The [`justfile`](template/justfile) is the canonical place where developer commands live: `just format` (ruff lint + format), `just check-types` (ty), `just check-complexity` (complexipy), and `just test` (pytest with coverage).
+
+On every commit, [`prek`](https://github.com/j178/prek) (a faster `pre-commit` drop-in) runs such just recipes (except for the tests) + a combination of generic file hygiene hooks, `codespell` for typos, `gitleaks` for leaked secrets and `commitizen` for [conventional commit convention](https://www.conventionalcommits.org/) enforcement.
+
+The CI [`verify.yml`](template/.github/workflows/verify.yml) workflow simply executes `prek run --all-files` followed by `just test` — so what passes (or fails) on your machine is exactly what passes (or fails) on the remote, and [`prek.toml`](template/prek.toml) is the single source of truth for all checks.
 
 ### Automatic Versioning and Releases
-Because every commit on `main` is guaranteed to follow the Conventional Commits spec (thanks to the `commitizen` hook), [`python-semantic-release`](https://python-semantic-release.readthedocs.io/) can deterministically derive the next version number from the commit history. The [`release.yml`](template/.github/workflows/release.yml) workflow runs on every merge to `main`: it computes the new version, updates `pyproject.toml` and the changelog, tags the commit, builds the wheel with `uv build`, publishes it to PyPI with `uv publish`, and creates the matching GitHub release. The whole feat-branch → PR → merge → release loop is hands-off: you write conventional commits, the rest happens by itself.
+Because every commit on `main` is guaranteed to follow the Conventional Commits spec (thanks to the `commitizen` hook), [`python-semantic-release`](https://python-semantic-release.readthedocs.io/) can deterministically derive the next version number from the commit history.
+
+The [`release.yml`](template/.github/workflows/release.yml) workflow runs on every merge to `main`:
+1. it computes the new version
+2. updates `pyproject.toml` and the changelog
+3. tags the commit
+4. builds the wheel with `uv build`
+5. ublishes it to PyPI with `uv publish`
+6. and creates the matching GitHub release.
+ 
+The whole feat-branch → PR → merge → release loop is hands-off: you write conventional commits, the rest happens by itself.
 
 ## Tooling
 
