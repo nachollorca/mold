@@ -1,14 +1,14 @@
 # mold
 
-A modern [Copier](https://copier.readthedocs.io/) template for Python packages.
+A modern [![Copier](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/copier-org/copier/master/img/badge/badge-grayscale-inverted-border-orange.json)](https://github.com/copier-org/copier) template for Python packages.
 
 ![mold](media/mold.png)
 
 ## Why this template
 
-**One source of truth for code quality, identical locally and on CI, plus fully automated semantic versioning and publishing.**
+**One source of truth for all code quality checks, identical locally (pre-commit) and remotely (CI), plus fully automated semantic versioning and publishing.**
 
-Every check (lint, format, type, complexity, spelling, secret scanning, tests) is defined once in the [`justfile`](template/justfile) / [`prek.toml`](template/prek.toml) and runs both in your pre-commit hook *and* in the GitHub Actions [`verify.yaml`](template/.github/workflows/verify.yml) workflow. Conventional commits are enforced, and every merge to `main` triggers an automatic version bump, GitHub release, and PyPI publish — no manual tagging, changelogs, or release steps.
+Every check (lint, type, complexity, spelling...) is defined once in [`prek.toml`](template/prek.toml) and runs both in your pre-commit hook *and* in the GitHub Actions [`verify.yaml`](template/.github/workflows/verify.yml) workflow. Conventional commits are enforced, and every merge to `main` triggers an automatic version bump, GitHub release, and PyPI publish — no manual tagging, changelogs, or release steps.
 
 ## How it works
 
