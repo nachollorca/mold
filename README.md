@@ -17,7 +17,6 @@ The particulars are intentionally kept in the files themselves; browse [`templat
 ## Tooling
 
 - [`uv`](https://docs.astral.sh/uv/) — dependency management, builds, and publishing
-- [`uv_build`](https://docs.astral.sh/uv/concepts/build-backend/) — build backend
 - [`just`](https://github.com/casey/just) — task runner (see [`justfile`](justfile))
 - [`prek`](https://github.com/j178/prek) — fast pre-commit hook runner (see [`prek.toml`](prek.toml))
 - [`ruff`](https://docs.astral.sh/ruff/) — linting and formatting
@@ -47,3 +46,6 @@ uvx copier copy gh:nachollorca/mold my-new-project
 # or from a local checkout:
 uvx copier copy ./mold my-new-project
 ```
+
+## Updating / Syncing
+If you want to apply this template to your existing repo or you used an old version of it and want to upgrade, try [this prompt](https://github.com/nachollorca/pi-setup/blob/main/prompts/sync-template.md) with a modern coding agent (e.g. [pi](https://pi.dev/)).
