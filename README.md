@@ -42,10 +42,8 @@ Before using this template, you need to install the following tools on your syst
 
 ```bash
 # from github
-uvx copier copy gh:nachollorca/mold my-new-project
-# or from a local checkout:
-uvx copier copy ./mold my-new-project
-```
+copier copy gh:nachollorca/mold my-new-project
 
-## Updating / Syncing
-If you want to apply this template to your existing repo or you used an old version of it and want to upgrade, try [this prompt](https://github.com/nachollorca/pi-setup/blob/main/prompts/sync-template.md) with a modern coding agent (e.g. [pi](https://pi.dev/)).
+# or from a local checkout:
+copier copy ./mold my-new-project
+```
