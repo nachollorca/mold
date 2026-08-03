@@ -1,3 +1,9 @@
+# Why a justfile and not aliases in pyproject.toml?
+# [project.scripts] maps names to Python callables only, so shell operations
+# (reset-env's rm -rf, run's --env-file, upgrade's sequencing) would need a
+# wrapper module to re-implement. uv has no task aliases yet either
+# (astral-sh/uv#5903). Revisit if uv ships a task runner.
+
 set dotenv-load := true
 
 # Python environment ----------------------------------------------------------
