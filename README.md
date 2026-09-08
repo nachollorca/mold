@@ -4,6 +4,9 @@ A modern [![Copier](https://img.shields.io/endpoint?url=https://raw.githubuserco
 
 ![mold](media/mold.png)
 
+Click the thumbnail to see a full presentation in the 25th Aniversary of EuroPyhon in Krakaw 2026.
+[![EuroPython 2026](https://i.ytimg.com/an_webp/jg1ZaqcK7ds/mqdefault_6s.webp?du=3000&sqp=CLCqgdUG&rs=AOn4CLBEOIQeiILmNLqwQ4bb5eHVg3BZlw)](https://www.youtube.com/watch?v=jg1ZaqcK7ds)
+
 ## Why this template
 
 **One source of truth for all code quality checks, identical locally and remotely, plus fully automated semantic versioning and publishing.**
